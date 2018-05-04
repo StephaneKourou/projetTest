@@ -46,3 +46,30 @@ FuzzyDouble <- function(x, mean = 0, sd = 1) {
   class(fuzzydouble) <- c("FuzzyDouble", class(fuzzydouble))
   return(fuzzydouble)
 }
+
+
+
+#' Plot FuzzyDouble
+#'
+#' Plot a FuzzyDouble object
+#'
+#' @param x The \code{\link{FuzzyDouble}} object
+#' @param xlab The X-axis label
+#' @param ylab The Y-axis label
+#' @param ... Extra parameters passed to \code{\link{plot}}
+#' @param LineCol The color of the line representing $y=2x$
+#'
+#' @importFrom graphics plot
+#' @method plot FuzzyDouble
+#' @export
+#'
+#' @examples
+#' plot(FuzzyDouble(1:10))
+plot.FuzzyDouble <- function(x, xlab = "x", ylab = "Double",
+                             ..., LineCol = "red") {
+  # xy standard plot
+  graphics::plot(x$x, x$y, xlab = xlab, ylab = ylab,
+                 ...)
+  # Add the regression line
+  graphics::lines(x$x, 2 * x$x, col = LineCol)
+}
